@@ -6,7 +6,7 @@ import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.serialization.StringSerializer;
-import org.mgm.factory.CustomerFactory;
+import org.mgm.factory.OrdersFactory;
 import org.mgm.model.Order;
 
 import java.util.Properties;
@@ -25,10 +25,16 @@ public class ProducerOrders {
         producer.close();
 
         ObjectMapper objectMapper = new ObjectMapper();
-        Order order = new Order();
-        order.setCustomer(CustomerFactory.generateCustomer());
+        Order order;
+        String OrderAsString;
         try {
-            String OrderAsString = objectMapper.writeValueAsString(order);
+            order = new Order();
+            order.setCustomer(OrdersFactory.generateCustomer(1));
+            OrderAsString = objectMapper.writeValueAsString(order);
+            System.out.println(OrderAsString);
+            order = new Order();
+            order.setCustomer(OrdersFactory.generateCustomer(5));
+            OrderAsString = objectMapper.writeValueAsString(order);
             System.out.println(OrderAsString);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
