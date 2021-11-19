@@ -1,19 +1,22 @@
 package org.mgm.model;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
 
-    public Order() {
-        orderNumber = 0;
-        customer = new Customer();
-        purchasedProducts = null;
-    }
-
     private Customer customer;
     private long orderNumber;
-    private List<Product> purchasedProducts;
+    private List<String> purchasedProducts;
+
+    public List<String> getPurchasedProducts() {
+        return purchasedProducts;
+    }
+
+    public Order() {
+        purchasedProducts = new ArrayList<String>();
+    }
 
     public Customer getCustomer() {
         return customer;
@@ -23,9 +26,6 @@ public class Order {
         return orderNumber;
     }
 
-    public List<Product> getPurchasedProducts() {
-        return purchasedProducts;
-    }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
@@ -35,8 +35,8 @@ public class Order {
         this.orderNumber = orderNumber;
     }
 
-    public void setPurchasedProducts(List<Product> purchasedProducts) {
-        this.purchasedProducts = purchasedProducts;
+    public void addProduct(String purchasedProduct) {
+        purchasedProducts.add(purchasedProduct);
     }
 
 }
